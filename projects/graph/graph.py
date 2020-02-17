@@ -86,19 +86,25 @@ class Graph:
                     s.push(neighbor)
 
 
-    def dft_recursive(self, starting_vertex):
+    def dft_recursive(self, starting_vertex, visited = None):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
 
         This should be done using recursion.
         """
-        # Check if node is visited
+        # If visited is none create a blank set
+        if visited is None:
+            visited = set()
+        # Add starting to the set and print 
+        visited.add(starting_vertex)
+        print(f'DFT Recursive: {starting_vertex}')
+        # Get children of starting and if child not in visited already then RECURSION 
+        for child in self.vertices[starting_vertex]:
+            if child not in visited:
+                self.dft_recursive(child, visited)
         # Hint: https://docs.python-guide.org/writing/gotchas/
-        # If not
-            # Mark it as visited
-            # Print
-            # Call DFT_Recursive on each chicld 
+
 
 
     def bfs(self, starting_vertex, destination_vertex):
@@ -184,7 +190,7 @@ if __name__ == '__main__':
         1, 2, 4, 3, 7, 6, 5
         1, 2, 4, 3, 7, 5, 6
     '''
-    graph.bft(1)
+    # graph.bft(1)
 
     '''
     Valid DFT paths:
@@ -193,19 +199,19 @@ if __name__ == '__main__':
         1, 2, 4, 7, 6, 3, 5
         1, 2, 4, 6, 3, 5, 7
     '''
-    graph.dft(1)
-    # graph.dft_recursive(1)
+    # graph.dft(1)
+    graph.dft_recursive(1)
 
-    # '''
-    # Valid BFS path:
-    #     [1, 2, 4, 6]
-    # '''
+    '''
+    Valid BFS path:
+        [1, 2, 4, 6]
+    '''
     # print(graph.bfs(1, 6))
 
-    # '''
-    # Valid DFS paths:
-    #     [1, 2, 4, 6]
-    #     [1, 2, 4, 7, 6]
-    # '''
+    '''
+    Valid DFS paths:
+        [1, 2, 4, 6]
+        [1, 2, 4, 7, 6]
+    '''
     # print(graph.dfs(1, 6))
     # print(graph.dfs_recursive(1, 6))
